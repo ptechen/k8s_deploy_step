@@ -12,7 +12,7 @@ mkdir -p /etc/docker
 
 mkdir -p /data/docker
 
-localIP=$(ip addr|grep 'inet '|grep -v 127.0.0.1|grep -v inet6|awk '{print $2}'|tr -d "add:")
+localIP=$(ip addr|grep eth0|grep inet|grep -v 127.0.0.1|grep -v inet6|awk '{print $2}'|tr -d "add:")
 
 localip=${localIP%/*}
 
