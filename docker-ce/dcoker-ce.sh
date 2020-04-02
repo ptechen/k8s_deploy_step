@@ -31,7 +31,7 @@ echo '{
     "docker.mirrors.ustc.edu.cn",
     "registry.access.redhat.com",
     "quay.io",
-    "wds.harbor.com"
+    "vadd.harbor.com"
   ],
   "bip": "172.'$backip'.1/24",
   "exec-opts": ["native.cgroupdriver=systemd"],
