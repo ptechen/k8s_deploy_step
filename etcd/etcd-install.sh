@@ -50,6 +50,12 @@ chown -R etcd:etcd /data/etcd/etcd-server
 
 chmod +x /opt/etcd/etcd-server-startup.sh
 
+yum install supervisor -y
+
+systemctl start supervisord
+
+systemctl enable supervisord
+
 echo '[program:etcd-server-'${back_ip}']
 command=/opt/etcd/etcd-server-startup.sh                        ; the program (relative uses PATH, can take args)
 numprocs=1                                                      ; number of processes copies to start (def 1)
@@ -80,11 +86,6 @@ chown -R etcd.etcd /opt/etcd
 
 chown -R etcd.etcd /opt/etcd/certs
 
-yum install supervisor -y
-
-systemctl start supervisord
-
-systemctl enable supervisord
 
 supervisorctl update
 # etcdctl cluster-health
