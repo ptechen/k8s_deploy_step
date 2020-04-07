@@ -6,12 +6,14 @@ tar xf /data/nfs/etcd-v3.4.7-linux-amd64.tar.gz -C /opt
 
 ln -s /opt/etcd-v3.4.7-linux-amd64 /opt/etcd
 
+groupadd etcd
 useradd -s /sbin/nologin -M etcd
 
 mkdir -p /opt/etcd/certs
 
-cp ../certs/pem/etcd-peer*.pem /opt/etcd/certs
-cp ../certs/pem/ca.pem /opt/etcd/certs
+#cp /data/nfs/k8s_deploy_step/certs/pem/etcd-peer*.pem /opt/etcd/certs
+#cp /data/nfs/k8s_deploy_step/certs/pem/ca.pem /opt/etcd/certs
+ln -s /data/nfs/k8s_deploy_step/certs/pem/* /opt/etcd/certs
 localIP=$(ip addr|grep eth0|grep inet|grep -v 127.0.0.1|grep -v inet6|awk '{print $2}'|tr -d "add:")
 
 localip=${localIP%/*}
@@ -27,7 +29,7 @@ echo '#!/bin/sh
        --quota-backend-bytes 8000000000 \
        --initial-advertise-peer-urls https://'${localip}':2380 \
        --advertise-client-urls https://'${localip}':2379,http://127.0.0.1:2379 \
-       --initial-cluster  etcd-server-7-12=https://10.4.7.12:2380,etcd-server-7-21=https://10.4.7.21:2380,etcd-server-7-22=https://10.4.7.22:2380 \
+       --initial-cluster  etcd-server-3-240=https://192.168.3.240:2380,etcd-server-3-241=https://192.168.3.241:2380,etcd-server-3-240=https://192.168.3.242:2380 \
        --ca-file ./certs/ca.pem \
        --cert-file ./certs/etcd-peer.pem \
        --key-file ./certs/etcd-peer-key.pem \
@@ -44,7 +46,7 @@ echo '#!/bin/sh
 
 mkdir -p /data/etcd/etcd-server
 
-chown -R etcd.etcd /data/etcd/etcd-server
+chown -R etcd:etcd /data/etcd/etcd-server
 
 chmod +x /opt/etcd/etcd-server-startup.sh
 
@@ -80,8 +82,7 @@ chown -R etcd.etcd /data/logs/etcd-server
 
 ln -s /opt/etcd/etcdctl /usr/bin/etcdctl
 
-cd /opt/etcd
-chown -R etcd.etcd ./
+chown -R etcd.etcd /opt/etcd
 
 chown -R etcd.etcd /opt/etcd/certs
 
