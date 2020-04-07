@@ -1,13 +1,13 @@
 #!/bin/bash
 
-yum install epel-release -y
+#yum install epel-release -y
 
 tar xf /data/nfs/etcd-v3.4.7-linux-amd64.tar.gz -C /opt
 
 ln -s /opt/etcd-v3.4.7-linux-amd64 /opt/etcd
 
 groupadd etcd
-useradd -s /sbin/nologin -M etcd
+useradd -s /sbin/nologin -M etcd -g etcd
 
 mkdir -p /opt/etcd/certs
 
@@ -49,12 +49,6 @@ mkdir -p /data/etcd/etcd-server
 chown -R etcd:etcd /data/etcd/etcd-server
 
 chmod +x /opt/etcd/etcd-server-startup.sh
-
-yum install supervisor -y
-
-systemctl start supervisord
-
-systemctl enable supervisord
 
 echo '[program:etcd-server-'${back_ip}']
 command=/opt/etcd/etcd-server-startup.sh                        ; the program (relative uses PATH, can take args)
