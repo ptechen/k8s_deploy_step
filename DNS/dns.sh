@@ -54,7 +54,7 @@ vadd3-245           A    192.168.3.224
 echo '$ORIGIN harbor.com.
 $TTL 600	; 10 minutes
 @   		IN SOA dns.harbor.com. dnsadmin.harbor.com. (
-				2020031708 ; serial
+				2020040708 ; serial
 				10800      ; refresh (3 hours)
 				900        ; retry (15 minutes)
 				604800     ; expire (1 week)
@@ -62,9 +62,9 @@ $TTL 600	; 10 minutes
 				)
 				NS   dns.harbor.com.
 $TTL 60	; 1 minute
-dns                A    192.168.3.224
-harbor             A    192.168.3.220
-k8s-yaml           A    192.168.3.220
+dns                A    192.168.3.244
+harbor             A    192.168.3.245
+k8s-yaml           A    192.168.3.245
 ' > /var/named/harbor.com.zone
 
 
