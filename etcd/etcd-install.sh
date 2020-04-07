@@ -56,6 +56,8 @@ systemctl start supervisord
 
 systemctl enable supervisord
 
+systemctl status supervisord
+
 echo '[program:etcd-server-'${back_ip}']
 command=/opt/etcd/etcd-server-startup.sh                        ; the program (relative uses PATH, can take args)
 numprocs=1                                                      ; number of processes copies to start (def 1)
