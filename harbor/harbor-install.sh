@@ -1,16 +1,18 @@
 #!/bin/bash
 
 # /opt/harbor/harbor.yml
-# hostname: harbor.od.com
+# hostname: vadd.harbor.com
 # http:
 #   port: 180
 # data_volume: /data/harbor
 # location: /data/harbor/logs
-tar xf harbor-offline-installer-v1.10.1.tgz -C /opt
+mkdir -p /data/harbor
+mkdir -p /data/harbor/logs
+tar xf /data/nfs/harbor-offline-installer-v1.10.1.tgz -C /opt
 mv /opt/harbor /opt/harbor-v1.10.1
 ln -s /opt/harbor-v1.10.1 /opt/harbor
 yum install epel-release -y
-mkdir -p /data/harbor/logs
+yum install docker-compose -y
 
 #yum install -y python3
 #

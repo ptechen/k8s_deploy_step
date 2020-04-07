@@ -1,0 +1,21 @@
+{
+    "CN": "Vadd",
+    "hosts": [
+    ],
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "names": [
+        {
+            "C": "CN",
+            "ST": "shanghai",
+            "L": "shanghai",
+            "O": "od",
+            "OU": "ops"
+        }
+    ],
+    "ca": {
+        "expiry": "175200h"
+    }
+}

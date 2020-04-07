@@ -42,12 +42,12 @@ $TTL 600	; 10 minutes
 				)
 			NS   dns.vadd.com.
 $TTL 60	; 1 minute
-dns                 A    192.168.3.224
-vadd3-240           A    192.168.3.220
-vadd3-241           A    192.168.3.221
-vadd3-242           A    192.168.3.222
-vadd3-244           A    192.168.3.223
-vadd3-245           A    192.168.3.224
+dns                 A    192.168.3.244
+vadd3-240           A    192.168.3.240
+vadd3-241           A    192.168.3.241
+vadd3-242           A    192.168.3.242
+vadd3-244           A    192.168.3.244
+vadd3-245           A    192.168.3.245
 ' > /var/named/vadd.com.zone
 
 
@@ -63,7 +63,7 @@ $TTL 600	; 10 minutes
 				NS   dns.harbor.com.
 $TTL 60	; 1 minute
 dns                A    192.168.3.244
-harbor             A    192.168.3.245
+vadd               A    192.168.3.245
 k8s-yaml           A    192.168.3.245
 ' > /var/named/harbor.com.zone
 
@@ -71,4 +71,4 @@ k8s-yaml           A    192.168.3.245
 systemctl start named
 systemctl enable named
 # netstat -luntp|grep 53
-dig -t A vadd3-245.host.com @192.168.3.244 +short
+dig -t A vadd3-245.vadd.com @192.168.3.244 +short
