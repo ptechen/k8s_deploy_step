@@ -2,9 +2,9 @@
 
 #yum install epel-release -y
 
-tar xf /data/nfs/etcd-v3.4.7-linux-amd64.tar.gz -C /opt
+tar xf /data/nfs/etcd-v3.1.20-linux-amd64.tar.gz -C /opt
 
-ln -s /opt/etcd-v3.4.7-linux-amd64 /opt/etcd
+ln -s /opt/etcd-v3.1.20-linux-amd64 /opt/etcd
 
 groupadd etcd
 useradd -s /sbin/nologin -M etcd -g etcd
