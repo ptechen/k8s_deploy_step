@@ -83,7 +83,7 @@ vrrp_instance VI_1 {
          chk_nginx
     }
     virtual_ipaddress {
-        10.4.7.10
+        192.168.3.243
     }
 }' > /etc/keepalived/keepalived.conf
 
