@@ -4,7 +4,7 @@ yum install supervisor -y
 systemctl start supervisord
 systemctl enable supervisord
 
-tar xf /data/nfs/kubernetes-server-linux-amd64-v1.15.4.tar.gz -C /opt
+tar xvf /data/nfs/kubernetes-server-linux-amd64-v1.15.4.tar.gz -C /opt
 mv /opt/kubernetes /opt/kubernetes-v1.15.4
 ln -s /opt/kubernetes-v1.15.4 /opt/kubernetes
 
@@ -144,6 +144,7 @@ stdout_logfile_backups=4                                        ; # of stdout lo
 stdout_capture_maxbytes=1MB                                     ; number of bytes in 'capturemode' (default 0)
 stdout_events_enabled=false                                     ; emit events on stdout writes (default false)
 ' > /etc/supervisord.d/kube-apiserver.ini
-
-supervisorctl update
 sleep 3
+supervisorctl update
+supervisorctl status
+
