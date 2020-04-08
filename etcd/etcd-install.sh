@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#yum install epel-release -y
+yum install epel-release -y
 
 tar xf /data/nfs/etcd-v3.1.20-linux-amd64.tar.gz -C /opt
 
@@ -14,11 +14,18 @@ mkdir -p /opt/etcd/certs
 cp /data/nfs/k8s_deploy_step/certs/pem/etcd-peer*.pem /opt/etcd/certs
 cp /data/nfs/k8s_deploy_step/certs/pem/ca.pem /opt/etcd/certs
 #ln -s /data/nfs/k8s_deploy_step/certs/pem/* /opt/etcd/certs
+
+yum install supervisor -y
+
+systemctl start supervisord
+
+systemctl enable supervisord
 localIP=$(ip addr|grep eth0|grep inet|grep -v 127.0.0.1|grep -v inet6|awk '{print $2}'|tr -d "add:")
 
 localip=${localIP%/*}
 
 backip=$(echo $localip|awk -F. '{ print $3"."$4 }')
+
 
 back_ip=${backip//./-}
 echo '#!/bin/sh
@@ -50,11 +57,7 @@ chown -R etcd:etcd /data/etcd/etcd-server
 
 chmod +x /opt/etcd/etcd-server-startup.sh
 
-yum install supervisor -y
 
-systemctl start supervisord
-
-systemctl enable supervisord
 
 systemctl status supervisord
 
