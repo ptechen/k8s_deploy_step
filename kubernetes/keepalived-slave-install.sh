@@ -2,13 +2,13 @@
 
 yum install epel-release -y
 
-echo '[nginx-stable]
-name=nginx stable repo
-baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
-gpgcheck=1
-enabled=1
-gpgkey=https://nginx.org/keys/nginx_signing.key
-module_hotfixes=true' > /etc/yum.repos.d/nginx.repo
+#echo '[nginx-stable]
+#name=nginx stable repo
+#baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
+#gpgcheck=1
+#enabled=1
+#gpgkey=https://nginx.org/keys/nginx_signing.key
+#module_hotfixes=true' > /etc/yum.repos.d/nginx.repo
 
 yum install nginx -y
 
@@ -17,8 +17,8 @@ yum install keepalived -y
 echo '
 stream {
     upstream kube-apiserver {
-        server 10.4.7.21:6443     max_fails=3 fail_timeout=30s;
-        server 10.4.7.22:6443     max_fails=3 fail_timeout=30s;
+        server 192.168.3.241:6443     max_fails=3 fail_timeout=30s;
+        server 192.168.3.242:6443     max_fails=3 fail_timeout=30s;
     }
     server {
         listen 7443;
