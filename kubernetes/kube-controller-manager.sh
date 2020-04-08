@@ -2,7 +2,7 @@
 
 echo '#!/bin/sh
 ./kube-controller-manager \
-  --cluster-cidr 172.7.0.1/16 \
+  --cluster-cidr 172.3.0.1/16 \
   --leader-elect true \
   --log-dir /data/logs/kubernetes/kube-controller-manager \
   --master http://127.0.0.1:8080 \
