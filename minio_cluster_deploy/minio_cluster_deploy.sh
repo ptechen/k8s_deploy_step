@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pkill minio
+#pkill minio
 export MINIO_ACCESS_KEY=admin
 export MINIO_SECRET_KEY=admin123
 cd /data/nfs
